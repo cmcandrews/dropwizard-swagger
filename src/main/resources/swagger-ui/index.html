@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Swagger UI</title>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
     <link href='css/hightlight.default.css' media='screen' rel='stylesheet' type='text/css'/>
     <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
     <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
@@ -16,36 +16,10 @@
     <script src='swagger-ui.js' type='text/javascript'></script>
     <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
 
-    <style type="text/css">
-        .swagger-ui-wrap {
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .icon-btn {
-            cursor: pointer;
-        }
-
-        #message-bar {
-            min-height: 30px;
-            text-align: center;
-            padding-top: 10px;
-        }
-
-        .message-success {
-            color: #89BF04;
-        }
-
-        .message-fail {
-            color: #cc0000;
-        }
-    </style>
-
     <script type="text/javascript">
-        $(function () {
-            window.swaggerUi = new SwaggerUi({
-                discoveryUrl:"http://localhost:8080/api-docs.json",
+	$(function () {
+	    window.swaggerUi = new SwaggerUi({
+                discoveryUrl:"{{basePath}}",
                 apiKey:"special-key",
                 dom_id:"swagger-ui-container",
                 supportHeaderParams: false,
@@ -76,15 +50,9 @@
 <body>
 <div id='header'>
     <div class="swagger-ui-wrap">
-        <a id="logo" href="http://swagger.wordnik.com">swagger</a>
+        <a id="logo" href="/">Service Docs</a>
 
         <form id='api_selector'>
-            <div class='input icon-btn'>
-                <img id="show-pet-store-icon" src="images/pet_store_api.png" title="Show Swagger Petstore Example Apis">
-            </div>
-            <div class='input icon-btn'>
-                <img id="show-wordnik-dev-icon" src="images/wordnik_api.png" title="Show Wordnik Developer Apis">
-            </div>
             <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl"
                                       type="text"/></div>
             <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
