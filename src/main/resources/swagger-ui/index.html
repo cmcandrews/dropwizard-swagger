@@ -19,11 +19,11 @@
     <script type="text/javascript">
 	$(function () {
 	    window.swaggerUi = new SwaggerUi({
-                discoveryUrl:"{{basePath}}",
-                apiKey:"special-key",
+                discoveryUrl:"{{discoveryUrl}}",
+                apiKey:"{{apiKey}}",
                 dom_id:"swagger-ui-container",
-                supportHeaderParams: false,
-                supportedSubmitMethods: ['get', 'post', 'put'],
+                supportHeaderParams: {{supportHeaderParams}},
+                supportedSubmitMethods: {{{supportedSubmitMethodsString}}},
                 onComplete: function(swaggerApi, swaggerUi){
                 	if(console) {
                         console.log("Loaded SwaggerUI")
@@ -38,7 +38,7 @@
                         console.log(data);
                     }
                 },
-                docExpansion: "none"
+                docExpansion: "{{docExpansion}}"
             });
 
             window.swaggerUi.load();
