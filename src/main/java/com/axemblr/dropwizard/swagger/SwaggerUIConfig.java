@@ -5,6 +5,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.wordnik.swagger.jaxrs.JaxrsApiReader;
 import org.apache.commons.lang.StringUtils;
 
 import javax.annotation.Nullable;
@@ -27,6 +28,8 @@ public class SwaggerUIConfig {
   private List<String> supportedSubmitMethods = Arrays.asList("get", "post", "put", "delete");
   @JsonProperty
   private DocExpansion docExpansion = DocExpansion.none;
+  @JsonProperty
+  private String formatString = JaxrsApiReader.FORMAT_STRING();
 
   public String getBaseUrl() {
     return baseUrl;
@@ -87,5 +90,13 @@ public class SwaggerUIConfig {
 
   public void setDocExpansion(DocExpansion docExpansion) {
     this.docExpansion = docExpansion;
+  }
+
+  public String getFormatString() {
+    return formatString;
+  }
+
+  public void setFormatString(String formatString) {
+    this.formatString = formatString;
   }
 }

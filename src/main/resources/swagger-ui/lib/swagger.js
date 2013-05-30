@@ -197,6 +197,10 @@
         _this = this;
       this.api = api;
       this.path = this.api.resourcePath != null ? this.api.resourcePath : resourceObj.path;
+
+      //Ugly hack due to a bug in Swagger Jersey support
+      this.path = this.path.replace("/api-docs/", "/api-docs.json/");
+
       this.description = resourceObj.description;
       parts = this.path.split("/");
       this.name = parts[parts.length - 1].replace('.{format}', '');

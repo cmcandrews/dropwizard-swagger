@@ -7,18 +7,15 @@ public class DemoConfig extends Configuration implements SwaggerUIConfigContaine
 
   @JsonProperty
   private String name;
-  private SwaggerUIConfig swaggerui;
+  private SwaggerUIConfig swaggerUI;
 
   public String getName() {
     return name;
   }
 
-  public SwaggerUIConfig getSwaggerui() {
-    return swaggerui;
+  @Override
+  public SwaggerUIConfig getSwaggerUI() {
+    return swaggerUI;
   }
 
-  @Override
-  public SwaggerUIConfig getSwaggerUIConfig() {
-    return swaggerui;
-  }
 }

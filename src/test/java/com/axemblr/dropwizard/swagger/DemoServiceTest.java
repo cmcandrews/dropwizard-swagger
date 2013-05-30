@@ -32,7 +32,7 @@ public class DemoServiceTest {
 
     Files.write((
             "name: Test\n" +
-            "swaggerui:\n" +
+            "swaggerUI:\n" +
             "    baseUrl: /swagger-ui2/\n" +
             "    discoveryUrl: /api-docs2.json\n" +
             "    apiKey: special-key2\n" +
@@ -42,7 +42,8 @@ public class DemoServiceTest {
             "        - 'post'\n" +
             "        - 'put'\n" +
             "        - 'delete'\n" +
-            "    docExpansion: list\n").getBytes(Charsets.UTF_8), configFile);
+            "    docExpansion: list\n" +
+            "    formatString: '.test123'\n").getBytes(Charsets.UTF_8), configFile);
 
     Thread runner = new Thread() {
       @Override
@@ -98,6 +99,23 @@ public class DemoServiceTest {
     assertThat(webpage, Matchers.containsString("supportHeaderParams: true"));
     assertThat(webpage, Matchers.containsString("supportedSubmitMethods: ['get', 'post', 'put', 'delete']"));
     assertThat(webpage, Matchers.containsString("docExpansion: \"list\""));
+  }
+
+  @Test
+  public void testFormatString() throws IOException {
+    HttpClient client = new DefaultHttpClient();
+    HttpGet get = new HttpGet("http://localhost:8080/api-docs.json");
+    HttpResponse response = client.execute(get);
+
+    assertEquals(200, response.getStatusLine().getStatusCode());
+
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    response.getEntity().writeTo(out);
+
+    String webpage = out.toString();
+    System.out.println(webpage);
+
+    assertThat(webpage, Matchers.containsString("/api-docs.test123/pet"));
   }
 
   @Test

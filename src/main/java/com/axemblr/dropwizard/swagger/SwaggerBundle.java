@@ -3,8 +3,9 @@ package com.axemblr.dropwizard.swagger;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
-import com.yammer.dropwizard.Bundle;
+import com.wordnik.swagger.jaxrs.JaxrsApiReader;
+import com.wordnik.swagger.jersey.JerseyApiReader;
+import com.wordnik.swagger.jersey.listing.ApiListingResourceJSON;
 import com.yammer.dropwizard.ConfiguredBundle;
 import com.yammer.dropwizard.assets.AssetServlet;
 import com.yammer.dropwizard.config.Bootstrap;
@@ -52,7 +53,12 @@ public class SwaggerBundle implements ConfiguredBundle<SwaggerUIConfigContainer>
 
   @Override
   public void run(SwaggerUIConfigContainer configContainer, Environment environment) throws Exception {
-    SwaggerUIConfig config = configContainer.getSwaggerUIConfig();
+    SwaggerUIConfig config = configContainer.getSwaggerUI();
+    if (config.getFormatString() != null) {
+      JerseyApiReader.setFormatString(config.getFormatString());
+      JaxrsApiReader.setFormatString(config.getFormatString());
+    }
+
     environment.addServlet(new MustachedIndexAssetServlet(config), config.getBaseUrl() + "*");
     environment.addResource(new ApiListingResourceJSON());
   }
