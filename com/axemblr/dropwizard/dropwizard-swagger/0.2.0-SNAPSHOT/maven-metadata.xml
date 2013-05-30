@@ -2,23 +2,23 @@
 <metadata modelVersion="1.1.0">
   <groupId>com.axemblr.dropwizard</groupId>
   <artifactId>dropwizard-swagger</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.2.0-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20130529.212933</timestamp>
+      <timestamp>20130530.004622</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20130529212933</lastUpdated>
+    <lastUpdated>20130530004622</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>0.1.2-20130529.212933-1</value>
-        <updated>20130529212933</updated>
+        <value>0.2.0-20130530.004622-1</value>
+        <updated>20130530004622</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.1.2-20130529.212933-1</value>
-        <updated>20130529212933</updated>
+        <value>0.2.0-20130530.004622-1</value>
+        <updated>20130530004622</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
