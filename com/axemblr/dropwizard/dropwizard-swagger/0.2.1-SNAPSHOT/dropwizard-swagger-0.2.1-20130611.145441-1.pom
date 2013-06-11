@@ -5,11 +5,11 @@
     <groupId>com.axemblr.dropwizard</groupId>
     <artifactId>dropwizard-swagger</artifactId>
     <name>Dropwizard integration with Wordnik Swagger</name>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.1-SNAPSHOT</version>
 
     <properties>
         <dropwizard.version>0.6.2</dropwizard.version>
-        <swagger.version>1.2.0</swagger.version>
+        <swagger.version>1.2.4</swagger.version>
         <junit.version>4.10</junit.version>
         <hamcrest.version>1.1</hamcrest.version>
         <mockito.version>1.9.0</mockito.version>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>com.wordnik</groupId>
             <artifactId>swagger-jersey-jaxrs_2.10.0</artifactId>
-            <version>1.2.2</version>
+            <version>1.2.4</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -128,7 +128,7 @@
         <repository>
             <id>github</id>
             <name>GitHub ${project.artifactId} Repository</name>
-            <url>https://raw.github.com/YOUR-GITHUB-USERNAME/${project.artifactId}/mvn-repo</url>
+            <url>https://raw.github.com/MattFlower/${project.artifactId}/mvn-repo</url>
         </repository>
     </distributionManagement>    
 </project>
