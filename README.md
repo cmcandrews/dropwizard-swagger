@@ -23,6 +23,23 @@ If you need to configure swagger, you can add settings to your config file:
       docExpansion: list
       formatString:
 
+## Maven Repo Info
+
+        <dependency>
+            <groupId>com.axemblr.dropwizard</groupId>
+            <artifactId>dropwizard-swagger</artifactId>
+            <version>0.2.0-SNAPSHOT</version>
+        </dependency>
+
+        <repository>
+            <id>dropwizard-swagger-mvn-repo</id>
+            <url>https://raw.github.com/MattFlower/dropwizard-swagger/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+
 ## Recent Updates
 0.1.1
 * Updated to support Dropwizard 0.6.2.
