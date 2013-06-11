@@ -11,17 +11,17 @@ The JS client should be available at http://localhost:8080/swagger-ui/index.html
 
 If you need to configure swagger, you can add settings to your config file:
 
-swaggerUI:
-  baseUrl: /swagger-ui/
-  discoveryUrl: http://localhost:8080/services/api-docs.json
-  supportHeaderParams: true
-  supportedSubmitMethods:
-    - 'get'
-    - 'post'
-    - 'put'
-    - 'delete'
-  docExpansion: list
-  formatString:
+    swaggerUI:
+      baseUrl: /swagger-ui/
+      discoveryUrl: http://localhost:8080/services/api-docs.json
+      supportHeaderParams: true
+      supportedSubmitMethods:
+        - 'get'
+        - 'post'
+        - 'put'
+        - 'delete'
+      docExpansion: list
+      formatString:
 
 ## Recent Updates
 0.1.1
