@@ -28,7 +28,7 @@ If you need to configure swagger, you can add settings to your config file:
         <dependency>
             <groupId>com.axemblr.dropwizard</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.2.0-SNAPSHOT</version>
+            <version>0.2.1-SNAPSHOT</version>
         </dependency>
 
         <repository>
@@ -41,6 +41,12 @@ If you need to configure swagger, you can add settings to your config file:
 
 
 ## Recent Updates
+0.2.1
+* Fixed problem with 0.2.0 - the swagger-ui version and swagger-jersey-jaxrs_2.10.0 versions didn't match exactly which was causing methods to not be found.
+
+0.2.0
+* Added configuration settings which allows swagger to be configurable.
+
 0.1.1
 * Updated to support Dropwizard 0.6.2.
 * Swagger-ui discovery url is now configurable using constructor `SwaggerBundle(String uriPath, String discoveryUrl)`.
