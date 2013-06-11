@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.net.ServerSocket;
 import java.util.concurrent.TimeUnit;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -24,14 +25,22 @@ import org.junit.Test;
 public class DemoServiceTest {
 
   private static File configFile;
+  private static int port;
 
   @BeforeClass
   public static void setUpClass() throws IOException, InterruptedException {
+    //Find a valid port to run the service on
+    ServerSocket openPort = new ServerSocket(0);
+    port = openPort.getLocalPort();
+    openPort.close();
+
     configFile = File.createTempFile("dropwizard-swagger", ".yml");
     configFile.deleteOnExit();
 
     Files.write((
             "name: Test\n" +
+            "http:\n" +
+            "    port: " + port + "\n" +
             "swaggerUI:\n" +
             "    baseUrl: /swagger-ui2/\n" +
             "    discoveryUrl: /api-docs2.json\n" +
@@ -65,7 +74,7 @@ public class DemoServiceTest {
 
   private void assertUriExists(String uri) throws IOException {
     HttpClient client = new DefaultHttpClient();
-    HttpGet get = new HttpGet("http://localhost:8080" + uri);
+    HttpGet get = new HttpGet("http://localhost:" + port + uri);
 
     HttpResponse response = client.execute(get);
 
@@ -83,7 +92,7 @@ public class DemoServiceTest {
   @Test
   public void testSwaggerUI() throws IOException {
     HttpClient client = new DefaultHttpClient();
-    HttpGet get = new HttpGet("http://localhost:8080/swagger-ui2/index.html");
+    HttpGet get = new HttpGet("http://localhost:" + port + "/swagger-ui2/index.html");
     HttpResponse response = client.execute(get);
 
     assertEquals(200, response.getStatusLine().getStatusCode());
@@ -104,7 +113,7 @@ public class DemoServiceTest {
   @Test
   public void testFormatString() throws IOException {
     HttpClient client = new DefaultHttpClient();
-    HttpGet get = new HttpGet("http://localhost:8080/api-docs.json");
+    HttpGet get = new HttpGet("http://localhost:" + port + "/api-docs.json");
     HttpResponse response = client.execute(get);
 
     assertEquals(200, response.getStatusLine().getStatusCode());
