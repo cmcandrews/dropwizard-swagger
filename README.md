@@ -9,7 +9,7 @@ To use it you need to:
 
 The JS client should be available at http://localhost:8080/swagger-ui/index.html.
 
-If you need to configure swagger, you can add settings to your config file:
+To configure swagger, you can add settings to your config file:
 
     swaggerUI:
       baseUrl: /swagger-ui/
@@ -22,6 +22,8 @@ If you need to configure swagger, you can add settings to your config file:
         - 'delete'
       docExpansion: list
       formatString:
+      
+This will require that your configuration file implement SwaggerUIConfigContainer.  
 
 ## Maven Repo Info
 
