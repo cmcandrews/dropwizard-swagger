@@ -5,17 +5,17 @@ import com.yammer.dropwizard.config.Configuration;
 
 public class DemoConfig extends Configuration implements SwaggerUIConfigContainer {
 
-  @JsonProperty
-  private String name;
-  private SwaggerUIConfig swaggerUI;
+    @JsonProperty
+    private String name;
+    private SwaggerUIConfig swaggerUI;
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  public SwaggerUIConfig getSwaggerUI() {
-    return swaggerUI;
-  }
+    @Override
+    public SwaggerUIConfig getSwaggerUI() {
+        return swaggerUI;
+    }
 
 }

@@ -7,21 +7,21 @@ import com.yammer.dropwizard.config.Environment;
 
 public class DemoService extends Service<DemoConfig> {
 
-  public static void main(String[] args) throws Exception {
-    new DemoService().run(args);
-  }
+    public static void main(String[] args) throws Exception {
+        new DemoService().run(args);
+    }
 
-  public DemoService() {
-  }
+    public DemoService() {
+    }
 
-  @Override
-  public void initialize(Bootstrap<DemoConfig> bootstrap) {
-    bootstrap.setName("demo-service");
-    bootstrap.addBundle(new SwaggerBundle());
-  }
+    @Override
+    public void initialize(Bootstrap<DemoConfig> bootstrap) {
+        bootstrap.setName("demo-service");
+        bootstrap.addBundle(new SwaggerBundle());
+    }
 
-  @Override
-  public void run(DemoConfig configuration, Environment environment) throws Exception {
-    environment.addResource(new PetResource());
-  }
+    @Override
+    public void run(DemoConfig configuration, Environment environment) throws Exception {
+        environment.addResource(new PetResource());
+    }
 }

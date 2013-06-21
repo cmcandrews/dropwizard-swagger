@@ -22,8 +22,8 @@ To configure swagger, you can add settings to your config file:
         - 'delete'
       docExpansion: list
       formatString:
-      
-This will require that your configuration file implement SwaggerUIConfigContainer.  
+
+This will require that your configuration file implement SwaggerUIConfigContainer.
 
 ## Maven Repo Info
 
@@ -43,6 +43,10 @@ This will require that your configuration file implement SwaggerUIConfigContaine
 
 
 ## Recent Updates
+0.2.2
+* You can now use $HOST in the discoveryUrl, e.g. `discoveryUrl: http://$HOST/services/api-docs.json`.  This should
+allow a little bit more flexibility in environments where there are many hostnames.
+
 0.2.1
 * Fixed problem with 0.2.0 - the swagger-ui version and swagger-jersey-jaxrs_2.10.0 versions didn't match exactly which was causing methods to not be found.
 

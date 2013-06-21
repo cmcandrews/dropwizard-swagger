@@ -21,49 +21,62 @@ import java.io.StringWriter;
  * Adds swagger support to a DropWizard project.
  */
 public class SwaggerBundle implements ConfiguredBundle<SwaggerUIConfigContainer> {
-  /**
-   * Extends the AssetServlet to allow the index.html to have the proper
-   * baseUrl for the docset.  Otherwise, it was always forced to look at
-   * localhost:8080/api-docs.json.  This was always incorrect outside of
-   * the development environment.
-   */
-  private class MustachedIndexAssetServlet extends AssetServlet {
-    private final String INDEX_FILE_NAME = "index.html";
-    private final String indexFileContents;
+    /**
+     * Extends the AssetServlet to allow the index.html to have the proper
+     * baseUrl for the docset.  Otherwise, it was always forced to look at
+     * localhost:8080/api-docs.json.  This was always incorrect outside of
+     * the development environment.
+     */
+    private class MustachedIndexAssetServlet extends AssetServlet {
+        private final String INDEX_FILE_NAME = "index.html";
+        private final Mustache indexFile;
+        private final SwaggerUIConfig config;
 
+        public MustachedIndexAssetServlet(SwaggerUIConfig config) {
+            super("/swagger-ui/", config.getBaseUrl(), "index.html");
+            MustacheFactory factory = new DefaultMustacheFactory("swagger-ui/");
+            indexFile = factory.compile(INDEX_FILE_NAME);
+            this.config = config;
+        }
 
-    public MustachedIndexAssetServlet(SwaggerUIConfig config) {
-      super("/swagger-ui/", config.getBaseUrl(), "index.html");
-      MustacheFactory factory = new DefaultMustacheFactory("swagger-ui/");
-      Mustache indexFile = factory.compile(INDEX_FILE_NAME);
-      StringWriter indexFileWriter = new StringWriter();
-      indexFile.execute(indexFileWriter, config);
-      indexFileContents = indexFileWriter.toString();
+        @Override
+        protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            resp.setHeader("Allow", "OPTIONS,GET");
+            resp.setHeader("Access-Control-Allow-Origin", "*");
+            resp.setHeader("Access-Control-Allow-Methods", "OPTIONS,GET");
+            resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+            super.doOptions(req, resp);
+        }
+
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            if (req.getPathInfo().startsWith("/" + INDEX_FILE_NAME)) {
+                StringWriter indexFileWriter = new StringWriter();
+
+                RuntimeSwaggerUIConfig runtimeConfig = new RuntimeSwaggerUIConfig(config, req);
+                indexFile.execute(indexFileWriter, runtimeConfig);
+
+                resp.getWriter().print(indexFileWriter.toString());
+            } else {
+                super.doGet(req, resp);
+            }
+        }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      if (req.getPathInfo().startsWith("/" + INDEX_FILE_NAME)) {
-        resp.getWriter().print(indexFileContents);
-      } else {
-        super.doGet(req, resp);
-      }
-    }
-  }
+    public void run(SwaggerUIConfigContainer configContainer, Environment environment) throws Exception {
+        SwaggerUIConfig config = configContainer.getSwaggerUI();
+        if (config.getFormatString() != null) {
+            JerseyApiReader.setFormatString(config.getFormatString());
+            JaxrsApiReader.setFormatString(config.getFormatString());
+        }
 
-  @Override
-  public void run(SwaggerUIConfigContainer configContainer, Environment environment) throws Exception {
-    SwaggerUIConfig config = configContainer.getSwaggerUI();
-    if (config.getFormatString() != null) {
-      JerseyApiReader.setFormatString(config.getFormatString());
-      JaxrsApiReader.setFormatString(config.getFormatString());
+        environment.addServlet(new MustachedIndexAssetServlet(config), config.getBaseUrl() + "*");
+        environment.addResource(new ApiListingResourceJSON());
     }
 
-    environment.addServlet(new MustachedIndexAssetServlet(config), config.getBaseUrl() + "*");
-    environment.addResource(new ApiListingResourceJSON());
-  }
-
-  @Override
-  public void initialize(Bootstrap<?> bootstrap) {
-  }
+    @Override
+    public void initialize(Bootstrap<?> bootstrap) {
+    }
 }
