@@ -6,7 +6,7 @@
     <groupId>com.axemblr.dropwizard</groupId>
     <artifactId>dropwizard-swagger</artifactId>
     <name>Dropwizard integration with Wordnik Swagger</name>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.3-SNAPSHOT</version>
 
     <properties>
         <dropwizard.version>0.6.2</dropwizard.version>

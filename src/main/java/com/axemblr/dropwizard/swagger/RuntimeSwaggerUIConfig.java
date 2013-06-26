@@ -23,16 +23,25 @@ public class RuntimeSwaggerUIConfig {
         String discoveryUrl = swaggerUIConfig.getDiscoveryUrl();
 
         if (discoveryUrl.contains("$HOST")) {
-            String newHost = request.getServerName();
-
-            if (request.getServerPort() != 80) {
-                newHost += ":" + request.getServerPort();
-            }
-
+            String newHost = getHostAndPort();
             discoveryUrl = discoveryUrl.replaceAll("\\$HOST", newHost);
         }
 
+        if (discoveryUrl.contains("$BASEURL")) {
+            String newBaseUrl = String.format("%s://%s", request.getScheme(), getHostAndPort());
+            discoveryUrl = discoveryUrl.replaceAll("\\$BASEURL", newBaseUrl);
+        }
+
         return discoveryUrl;
+    }
+
+    private String getHostAndPort() {
+        String newHost = request.getServerName();
+
+        if (request.getServerPort() != 80) {
+            newHost += ":" + request.getServerPort();
+        }
+        return newHost;
     }
 
     public String getApiKey() {

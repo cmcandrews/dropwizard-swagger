@@ -43,9 +43,14 @@ This will require that your configuration file implement SwaggerUIConfigContaine
 
 
 ## Recent Updates
+0.2.3
+* Add $BASEURL environment variable to the discoveryUrl.  This is similar to $HOST, but also includes the scheme.
+For example discoveryUrl: $BASEURL/services/api-docs.json
+
 0.2.2
 * You can now use $HOST in the discoveryUrl, e.g. `discoveryUrl: http://$HOST/services/api-docs.json`.  This should
-allow a little bit more flexibility in environments where there are many hostnames.
+allow a little bit more flexibility in environments where there are many hostnames.  $HOST encompasses both the server
+name and the port if the port is non-80.
 
 0.2.1
 * Fixed problem with 0.2.0 - the swagger-ui version and swagger-jersey-jaxrs_2.10.0 versions didn't match exactly which was causing methods to not be found.
