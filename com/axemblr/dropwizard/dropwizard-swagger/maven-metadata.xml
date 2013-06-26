@@ -4,8 +4,8 @@
   <artifactId>dropwizard-swagger</artifactId>
   <versioning>
     <versions>
-      <version>0.2.2-SNAPSHOT</version>
+      <version>0.2.3-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20130621151523</lastUpdated>
+    <lastUpdated>20130626145705</lastUpdated>
   </versioning>
 </metadata>
