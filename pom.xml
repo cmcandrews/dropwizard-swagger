@@ -141,4 +141,9 @@
             <url>https://raw.github.com/MattFlower/${project.artifactId}/mvn-repo</url>
         </repository>
     </distributionManagement>
+    <scm>
+        <connection>scm:git:git@github.com:MattFlower/dropwizard-swagger.git</connection>
+        <url>scm:git:git@github.com:MattFlower/dropwizard-swagger.git</url>
+        <developerConnection>scm:git:git@github.com:MattFlower/dropwizard-swagger.git</developerConnection>
+    </scm>
 </project>
