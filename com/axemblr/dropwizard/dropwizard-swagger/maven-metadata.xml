@@ -3,9 +3,10 @@
   <groupId>com.axemblr.dropwizard</groupId>
   <artifactId>dropwizard-swagger</artifactId>
   <versioning>
+    <release>0.2.3</release>
     <versions>
-      <version>0.2.3-SNAPSHOT</version>
+      <version>0.2.3</version>
     </versions>
-    <lastUpdated>20130626145907</lastUpdated>
+    <lastUpdated>20131001122303</lastUpdated>
   </versioning>
 </metadata>
