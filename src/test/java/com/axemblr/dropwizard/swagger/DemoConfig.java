@@ -1,7 +1,7 @@
 package com.axemblr.dropwizard.swagger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yammer.dropwizard.config.Configuration;
+import io.dropwizard.Configuration;
 
 public class DemoConfig extends Configuration implements SwaggerUIConfigContainer {
 

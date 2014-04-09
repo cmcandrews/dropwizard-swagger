@@ -37,8 +37,12 @@ public class DemoServiceTest {
 
         Files.write((
                 "name: Test\n" +
-                "http:\n" +
-                "    port: " + port + "\n" +
+                "server:\n" +
+                "    type: simple\n" +
+                "    applicationContextPath: \"/\"\n" +
+                "    connector:\n" +
+                "        type: http\n" +
+                "        port: " + port + "\n" +
                 "swaggerUI:\n" +
                 "    baseUrl: /swagger-ui2/\n" +
                 "    discoveryUrl: http://$HOST/api-docs2.json\n" +

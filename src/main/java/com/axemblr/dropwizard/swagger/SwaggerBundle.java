@@ -6,16 +6,17 @@ import com.github.mustachejava.MustacheFactory;
 import com.wordnik.swagger.jaxrs.JaxrsApiReader;
 import com.wordnik.swagger.jersey.JerseyApiReader;
 import com.wordnik.swagger.jersey.listing.ApiListingResourceJSON;
-import com.yammer.dropwizard.ConfiguredBundle;
-import com.yammer.dropwizard.assets.AssetServlet;
-import com.yammer.dropwizard.config.Bootstrap;
-import com.yammer.dropwizard.config.Environment;
+import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.servlets.assets.AssetServlet;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 /**
  * Adds swagger support to a DropWizard project.
@@ -33,7 +34,7 @@ public class SwaggerBundle implements ConfiguredBundle<SwaggerUIConfigContainer>
         private final SwaggerUIConfig config;
 
         public MustachedIndexAssetServlet(SwaggerUIConfig config) {
-            super("/swagger-ui/", config.getBaseUrl(), "index.html");
+            super("/swagger-ui/", config.getBaseUrl(), "index.html", Charset.forName("UTF-8"));
             MustacheFactory factory = new DefaultMustacheFactory("swagger-ui/");
             indexFile = factory.compile(INDEX_FILE_NAME);
             this.config = config;
@@ -72,8 +73,9 @@ public class SwaggerBundle implements ConfiguredBundle<SwaggerUIConfigContainer>
             JaxrsApiReader.setFormatString(config.getFormatString());
         }
 
-        environment.addServlet(new MustachedIndexAssetServlet(config), config.getBaseUrl() + "*");
-        environment.addResource(new ApiListingResourceJSON());
+        environment.servlets().addServlet("swagger", new MustachedIndexAssetServlet(config))
+                .addMapping(config.getBaseUrl() + "*");
+        environment.jersey().register(new ApiListingResourceJSON());
     }
 
     @Override
